@@ -28,7 +28,7 @@ const NuevoProyecto = () => {
             </button>
             <form
                 className="formulario-nuevo-proyecto"
-                onsubmit={handleSubmitProyecto}
+                onSubmit={handleSubmitProyecto}
             >
                 <input 
                     type="text"
