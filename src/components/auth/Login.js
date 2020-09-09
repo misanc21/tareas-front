@@ -29,7 +29,7 @@ const Login = () => {
                 <h1>Iniciar sesión</h1>
 
                 <form
-                    onsubmit={handleSubmit}
+                    onSubmit={handleSubmit}
                 >
                     <div className="campo-form">
                         <label htmlFor="email">Email</label>
