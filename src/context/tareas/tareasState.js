@@ -1,4 +1,5 @@
 import React, {useReducer}from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import tareasContext from './tareasContext'
 import tareasReducer from './tareasReducer'
@@ -7,7 +8,9 @@ import {
     AGREGAR_TAREA,
     VALIDAR_TAREA,
     ELIMINAR_TAREA,
-    STATUS_TAREA
+    STATUS_TAREA,
+    TAREA_ACTUAL,
+    ACTUALIZAR_TAREA
 } from '../../types'
 
 const TareasState = props => {
@@ -22,7 +25,8 @@ const TareasState = props => {
             {id:6, nombre:'elegir hosting', estado:true, proyectoId:2}
         ],
         tareasProyecto: null,
-        errorTarea: false
+        errorTarea: false,
+        tareaSeleccionada: null
     }
     const [state, dispatch] = useReducer(tareasReducer, initialState)
 
@@ -37,6 +41,7 @@ const TareasState = props => {
 
     //AGREGAR TAREA A PROYECTO SELECICONADO
     const addTareaFunc = tarea => {
+        tarea.id = uuidv4()
         dispatch({
             type: AGREGAR_TAREA,
             payload: tarea
@@ -66,6 +71,21 @@ const TareasState = props => {
         })
     }
 
+    //EXTRAE UNA TAREA PARA EDICION
+    const putTareaActualFunc = tarea => {
+        dispatch({
+            type: TAREA_ACTUAL,
+            payload: tarea
+        })
+    }
+
+    //ACTUALIZAR TAREA
+    const updateTareaActualFunc = tarea => {
+        dispatch({
+            type: ACTUALIZAR_TAREA,
+            payload: tarea
+        })
+    }
     return ( 
         <tareasContext.Provider
             value={{
@@ -74,9 +94,12 @@ const TareasState = props => {
                 validaTareaFunc,
                 deleteTareaFunc,
                 cambiaStatusTareaFunc,
+                putTareaActualFunc,
+                updateTareaActualFunc,
                 tareas: state.tareas,
                 tareasProyecto: state.tareasProyecto,
-                errorTarea: state.errorTarea
+                errorTarea: state.errorTarea,
+                tareaSeleccionada: state.tareaSeleccionada
             }}
         >
             {props.children}

@@ -8,7 +8,8 @@ const Tarea = ( { tarea }) => {
     const {
         deleteTareaFunc,
         getTareasFunc,
-        cambiaStatusTareaFunc
+        cambiaStatusTareaFunc,
+        putTareaActualFunc
     } = tareaContext
 
     const handleDeleteTarea = () => {
@@ -19,6 +20,10 @@ const Tarea = ( { tarea }) => {
     const cambiarStatus = () => {
         tarea.estado = !tarea.estado
         cambiaStatusTareaFunc(tarea)
+    }
+
+    const handlePutTareaActual = () => {
+        putTareaActualFunc(tarea)
     }
 
     return ( 
@@ -51,6 +56,7 @@ const Tarea = ( { tarea }) => {
                 <button
                     className="btn btn-primario"
                     type="button"
+                    onClick={handlePutTareaActual}
                 >
                     Editar
                 </button>

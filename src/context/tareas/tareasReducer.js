@@ -3,7 +3,9 @@ import {
     AGREGAR_TAREA,
     VALIDAR_TAREA,
     ELIMINAR_TAREA,
-    STATUS_TAREA
+    STATUS_TAREA,
+    TAREA_ACTUAL,
+    ACTUALIZAR_TAREA
 } from '../../types'
 
 export default (state, action) => {
@@ -35,12 +37,18 @@ export default (state, action) => {
                 tareas : nuevas
             }
         case STATUS_TAREA:
-            console.log(state.tareas)
+        case ACTUALIZAR_TAREA:
             const nvatareas = state.tareas.map(t => t.id === action.payload.id ? action.payload : t)
             console.log(nvatareas)
             return {
-                tareas: nvatareas,
                 ...state,
+                tareas: nvatareas,
+                tareaSeleccionada: null,
+            }
+        case TAREA_ACTUAL: 
+            return {
+                ...state,
+                tareaSeleccionada: action.payload
             }
         default:
             return state;
