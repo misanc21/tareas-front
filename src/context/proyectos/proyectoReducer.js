@@ -2,7 +2,9 @@ import {
     FORMULARIO_PROYECTO,
     OBTENER_PROYECTOS,
     AGREGAR_PROYECTO,
-    VALIDAR_FORMULARIO
+    VALIDAR_FORMULARIO,
+    PROYECTO_ACTUAL,
+    ELIMINAR_PROYECTO
 } from '../../types'
 
 export default (state, action) => {
@@ -31,6 +33,19 @@ export default (state, action) => {
             return{
                 ...state,
                 errorFormulario: true
+            }
+        case PROYECTO_ACTUAL:
+            const pa = state.proyectos.filter(p => p.id === action.payload)
+            return{
+                ...state,
+                proyectoActual: pa
+            }
+        case ELIMINAR_PROYECTO:
+            const ps = state.proyectos.filter(p=> p.id !== action.payload)
+            return{
+                ...state,
+                proyectos: ps,
+                proyectoActual: null
             }
         default: 
         return state
