@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import tareasContext from '../../context/tareas/tareasContext'
 
 const Tarea = ( { tarea }) => {
+
+    const tareaContext = useContext(tareasContext)
+    const {
+        deleteTareaFunc,
+        getTareasFunc
+    } = tareaContext
+
+    const handleDeleteTarea = () => {
+        deleteTareaFunc(tarea.id)
+        getTareasFunc(tarea.proyectoId)
+    }
+
     return ( 
         <li className="tarea sombra">
             <p>{tarea.nombre}</p>
@@ -25,7 +39,7 @@ const Tarea = ( { tarea }) => {
                     )
                 }
             </div>
-            <div className="acciones">
+            <div className="acciones"> 
                 <button
                     className="btn btn-primario"
                     type="button"
@@ -35,8 +49,9 @@ const Tarea = ( { tarea }) => {
                 <button
                     className="btn btn-secundario"
                     type="button"
+                    onClick={handleDeleteTarea}
                 >
-                    Editar
+                    Eliminar
                 </button>
             </div>
         </li>
