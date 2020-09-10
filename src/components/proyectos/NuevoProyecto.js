@@ -5,14 +5,22 @@ import proyectoContext from '../../context/proyectos/proyectoContext'
 const NuevoProyecto = () => {
     //obtener el state del formulario
     const proyectosContext = useContext(proyectoContext)
-    const { formulario, mostrarFormulario } = proyectosContext
+    const { 
+        formulario,
+        errorFormulario,
+        mostrarFormulario,
+        agregarProyecto,
+        mostrarError,
+    } = proyectosContext
 
 
-    
+
     const [proyecto, setProyecto] = useState({
         nombre: ''
     })
     const { nombre } = proyecto
+
+
 
     const handleChangeProyecto = e => {
         setProyecto({
@@ -23,11 +31,23 @@ const NuevoProyecto = () => {
 
     const handleSubmitProyecto = e => {
         e.preventDefault()
+
+        if(nombre.trim() === ''){
+            mostrarError()
+            return
+        }
+
+        agregarProyecto(proyecto)
+        setProyecto({
+            nombre:''
+        })
     }
 
     const handleOnClick = () => {
         mostrarFormulario()
     }
+
+
 
     return (
         <Fragment>
@@ -61,6 +81,11 @@ const NuevoProyecto = () => {
                     </form>
                     :
                     null
+            }
+            {
+                errorFormulario ? 
+                <p className="mensaje error">El nombre es obligatorio</p>
+                : null
             }
         </Fragment>
     );
