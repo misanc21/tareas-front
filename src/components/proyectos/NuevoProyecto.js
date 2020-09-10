@@ -5,8 +5,10 @@ import proyectoContext from '../../context/proyectos/proyectoContext'
 const NuevoProyecto = () => {
     //obtener el state del formulario
     const proyectosContext = useContext(proyectoContext)
-    const { formulario } = proyectosContext
+    const { formulario, mostrarFormulario } = proyectosContext
 
+
+    
     const [proyecto, setProyecto] = useState({
         nombre: ''
     })
@@ -23,11 +25,16 @@ const NuevoProyecto = () => {
         e.preventDefault()
     }
 
+    const handleOnClick = () => {
+        mostrarFormulario()
+    }
+
     return (
         <Fragment>
             <button
                 type="button"
                 className="btn btn-block btn-primario"
+                onClick={handleOnClick}
             >
                 Nuevo proyecto
             </button>
