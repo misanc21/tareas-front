@@ -7,12 +7,18 @@ const Tarea = ( { tarea }) => {
     const tareaContext = useContext(tareasContext)
     const {
         deleteTareaFunc,
-        getTareasFunc
+        getTareasFunc,
+        cambiaStatusTareaFunc
     } = tareaContext
 
     const handleDeleteTarea = () => {
         deleteTareaFunc(tarea.id)
         getTareasFunc(tarea.proyectoId)
+    }
+
+    const cambiarStatus = () => {
+        tarea.estado = !tarea.estado
+        cambiaStatusTareaFunc(tarea)
     }
 
     return ( 
@@ -24,6 +30,7 @@ const Tarea = ( { tarea }) => {
                         <button
                             type="button"
                             className="completo"
+                            onClick={cambiarStatus}
                         >
                         Completo
                         </button>
@@ -33,6 +40,7 @@ const Tarea = ( { tarea }) => {
                         <button
                             type="button"
                             className="incompleto"
+                            onClick={cambiarStatus}
                         >
                         Incompleto
                         </button>

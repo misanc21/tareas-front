@@ -2,7 +2,8 @@ import {
     TAREAS_PROYECTO,
     AGREGAR_TAREA,
     VALIDAR_TAREA,
-    ELIMINAR_TAREA
+    ELIMINAR_TAREA,
+    STATUS_TAREA
 } from '../../types'
 
 export default (state, action) => {
@@ -32,6 +33,14 @@ export default (state, action) => {
             return {
                 ...state,
                 tareas : nuevas
+            }
+        case STATUS_TAREA:
+            console.log(state.tareas)
+            const nvatareas = state.tareas.map(t => t.id === action.payload.id ? action.payload : t)
+            console.log(nvatareas)
+            return {
+                tareas: nvatareas,
+                ...state,
             }
         default:
             return state;

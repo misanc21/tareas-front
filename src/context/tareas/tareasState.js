@@ -6,7 +6,8 @@ import {
     TAREAS_PROYECTO,
     AGREGAR_TAREA,
     VALIDAR_TAREA,
-    ELIMINAR_TAREA
+    ELIMINAR_TAREA,
+    STATUS_TAREA
 } from '../../types'
 
 const TareasState = props => {
@@ -57,6 +58,14 @@ const TareasState = props => {
         })
     }
 
+    //CAMBIA EL ESO DE ADA TAREA
+    const cambiaStatusTareaFunc = tarea => {
+        dispatch({
+            type: STATUS_TAREA,
+            payload: tarea
+        })
+    }
+
     return ( 
         <tareasContext.Provider
             value={{
@@ -64,6 +73,7 @@ const TareasState = props => {
                 addTareaFunc,
                 validaTareaFunc,
                 deleteTareaFunc,
+                cambiaStatusTareaFunc,
                 tareas: state.tareas,
                 tareasProyecto: state.tareasProyecto,
                 errorTarea: state.errorTarea
