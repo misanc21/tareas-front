@@ -3,6 +3,7 @@ import React, {Fragment, useContext} from 'react';
 import Tarea from './Tarea'
 
 import proyectoContext from '../../context/proyectos/proyectoContext'
+import tareasContext from '../../context/tareas/tareasContext'
 
 const ListadoTareas = () => {
     const proyectosContext = useContext(proyectoContext)
@@ -10,17 +11,15 @@ const ListadoTareas = () => {
         proyectoActual,
         stEliminaProyecto
     } = proyectosContext
+
+    const tareaContext = useContext(tareasContext)
+    const {
+        tareasProyecto
+    } = tareaContext
     
     if(!proyectoActual) return <h2>Selecciona un proyecto</h2>
 
     const [proyecto] = proyectoActual
-
-    const tareasProyecto = [
-        {nombre:'elegir plataforma', estado:true},
-        {nombre:'elegir colores', estado:false},
-        {nombre:'elegir plataformas de pago', estado:false},
-        {nombre:'elegir hosting', estado:true}
-    ]
 
     const handleEliminarProyecto = () => {
         stEliminaProyecto(proyecto.id)
