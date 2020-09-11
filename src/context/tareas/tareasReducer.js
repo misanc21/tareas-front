@@ -11,16 +11,15 @@ import {
 export default (state, action) => {
     switch(action.type) {
         case TAREAS_PROYECTO:
-            const tar = state.tareas.filter(t => t.proyectoId === action.payload)
             return{
                 ...state,
-                tareasProyecto: tar
+                tareasProyecto: action.payload
             }
         case AGREGAR_TAREA : 
             return {
                 ...state,
-                tareas: [
-                    ...state.tareas,
+                tareasProyecto: [
+                    ...state.tareasProyecto,
                     action.payload
                 ],
                 errorTarea: false
@@ -31,18 +30,18 @@ export default (state, action) => {
                 errorTarea:true
             }
         case ELIMINAR_TAREA :
-            const nuevas =  state.tareas.filter(t => t.id !== action.payload)
+            const nuevas =  state.tareasProyecto.filter(t => t._id !== action.payload)
             return {
                 ...state,
-                tareas : nuevas
+                tareasProyecto : nuevas
             }
         case STATUS_TAREA:
         case ACTUALIZAR_TAREA:
-            const nvatareas = state.tareas.map(t => t.id === action.payload.id ? action.payload : t)
+            const nvatareas = state.tareasProyecto.map(t => t._id === action.payload.id ? action.payload : t)
             console.log(nvatareas)
             return {
                 ...state,
-                tareas: nvatareas,
+                tareasProyecto: nvatareas,
                 tareaSeleccionada: null,
             }
         case TAREA_ACTUAL: 

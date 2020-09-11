@@ -91,7 +91,7 @@ const ProyectoState = props => {
     //ELIMINA PROYECTO
     const stEliminaProyecto = async id => {
         try {
-            await clienteAxios.delete(`/api/proyectos/${1}`)
+            await clienteAxios.delete(`/api/proyectos/${id}`)
             dispatch({
                 type: ELIMINAR_PROYECTO,
                 payload: id

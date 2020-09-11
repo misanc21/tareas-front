@@ -24,7 +24,7 @@ const FormTarea = () => {
 
     const [tarea, setTarea] = useState({
         nombre:'',
-        proyectoId:'',
+        proyecto:'',
         estado: false
     })
     const {nombre} = tarea
@@ -37,7 +37,7 @@ const FormTarea = () => {
         }else{
             setTarea({
                 nombre:'',
-                proyectoId:'',
+                proyecto:'',
                 estado: false
             })
         }
@@ -46,7 +46,7 @@ const FormTarea = () => {
     const handleChange = e =>{
         setTarea({
             ...tarea,
-            proyectoId: proyecto.id,
+            proyecto: proyecto._id,
             [e.target.name]: e.target.value
         })
     }
@@ -70,7 +70,7 @@ const FormTarea = () => {
             nombre:''
         })
         
-        getTareasFunc(proyecto.id)
+        getTareasFunc(proyecto._id)
     }
     
 

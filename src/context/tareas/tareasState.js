@@ -1,5 +1,5 @@
 import React, {useReducer}from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import clienteAxios from '../../config/axios'
 
 import tareasContext from './tareasContext'
 import tareasReducer from './tareasReducer'
@@ -15,16 +15,7 @@ import {
 
 const TareasState = props => {
     const initialState = {
-        tareas: [
-            {id:0, nombre:'elegir plataforma', estado:true, proyectoId:1},
-            {id:1, nombre:'elegir colores', estado:false, proyectoId:1},
-            {id:2, nombre:'elegir plataformas de pago', estado:false, proyectoId:2},
-            {id:3, nombre:'elegir hosting', estado:true, proyectoId:3},
-            {id:4, nombre:'elegir colores', estado:false, proyectoId:3},
-            {id:5, nombre:'elegir plataformas de pago', estado:false, proyectoId:1},
-            {id:6, nombre:'elegir hosting', estado:true, proyectoId:2}
-        ],
-        tareasProyecto: null,
+        tareasProyecto: [],
         errorTarea: false,
         tareaSeleccionada: null
     }
@@ -32,20 +23,31 @@ const TareasState = props => {
 
 
     //OBTENER TAREAS DE PROYECTO
-    const getTareasFunc = id => {
-        dispatch({
-            type: TAREAS_PROYECTO,
-            payload: id
-        })
+    const getTareasFunc = async proyecto => {
+        try {
+            const resultado = await clienteAxios.get('/api/tareas', {params: {proyecto}})
+            console.log(resultado.data)
+            dispatch({
+                type: TAREAS_PROYECTO,
+                payload: resultado.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     //AGREGAR TAREA A PROYECTO SELECICONADO
-    const addTareaFunc = tarea => {
-        tarea.id = uuidv4()
-        dispatch({
-            type: AGREGAR_TAREA,
-            payload: tarea
-        })
+    const addTareaFunc = async tarea => {
+        try {
+            const resultado = await clienteAxios.post('/api/tareas', tarea)
+            console.log(resultado)
+            dispatch({
+                type: AGREGAR_TAREA,
+                payload: tarea
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     //VALIDA Y MUESTRA ERROR DE FORM TAREA
@@ -96,7 +98,6 @@ const TareasState = props => {
                 cambiaStatusTareaFunc,
                 putTareaActualFunc,
                 updateTareaActualFunc,
-                tareas: state.tareas,
                 tareasProyecto: state.tareasProyecto,
                 errorTarea: state.errorTarea,
                 tareaSeleccionada: state.tareaSeleccionada
