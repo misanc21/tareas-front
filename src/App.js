@@ -11,6 +11,14 @@ import Login from './components/auth/Login'
 import NuevaCuenta from './components/auth/NuevaCuenta'
 import Proyectos from './components/proyectos/Proyectos'
 
+import tokenAuth from './config/tokenAuth'
+
+//revisar si tenemos un token
+const token = localStorage.getItem('token')
+if(token){
+  tokenAuth(token)
+}
+
 function App() {
   return (
     <ProyectoState>
