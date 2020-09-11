@@ -33,8 +33,14 @@ const AuthState = props => {
             })
         } catch (error) {
             console.log(error.response)
+            const alerta = {
+                msg: error.response.data.msg,
+                categoria: 'alerta-error'
+            }
+
             dispatch({
-                type: REGISTRO_ERROR
+                type: REGISTRO_ERROR,
+                payload: alerta
             })
         }
     }
@@ -43,7 +49,7 @@ const AuthState = props => {
         <AuthContext.Provider
             value = {{
                 token: state.token,
-                autenticado: state.auntenticado,
+                autenticado: state.autenticado,
                 usuario: state.usuario,
                 mensaje: state.mensaje,
                 registrarUsuarioFunc,

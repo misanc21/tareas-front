@@ -18,6 +18,15 @@ const NuevaCuenta = props => {
         autenticado
     } = authsContext
 
+    useEffect(() => {
+        if(autenticado){
+            props.history.push('/proyectos')
+        }
+        if(mensaje){
+            mostrarAlertaFunc(mensaje.msg, mensaje.categoria)
+        }
+    }, [mensaje, autenticado, props.history])
+
     
 
     const [usuario, setUsuario] = useState({
@@ -27,10 +36,6 @@ const NuevaCuenta = props => {
         confirmar:''
     })
     const { nombre, email, password, confirmar } = usuario 
-
-
-
-
 
     const handleChange = e => {
         setUsuario({
