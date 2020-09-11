@@ -12,6 +12,7 @@ const RutaPrivada = ( {component: Component, ...props}) => {
 
     useEffect(()=>{
         usuarioAutenticadoFunc()
+    //eslint-disable-next-line
     },[])
 
     return ( 

@@ -3,7 +3,6 @@ import {
     AGREGAR_TAREA,
     VALIDAR_TAREA,
     ELIMINAR_TAREA,
-    STATUS_TAREA,
     TAREA_ACTUAL,
     ACTUALIZAR_TAREA
 } from '../../types'

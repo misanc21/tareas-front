@@ -25,6 +25,7 @@ const NuevaCuenta = props => {
         if(mensaje){
             mostrarAlertaFunc(mensaje.msg, mensaje.categoria)
         }
+    //eslint-disable-next-line
     }, [mensaje, autenticado, props.history])
 
     
