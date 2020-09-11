@@ -1,24 +1,24 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
 import alertaContext from '../../context/alertas/alertaContext'
 import authContext from '../../context/autenticacion/authContext'
 
-const NuevaCuenta = () => { 
+const NuevaCuenta = props => { 
     const alertasContext = useContext(alertaContext)
     const {
         mostrarAlertaFunc,
         alerta
     } = alertasContext
-
     const auhtsContext = useContext(authContext)
     const {
-        registrarUsuarioFunc
+        registrarUsuarioFunc,
+        mensaje,
+        autenticado
     } = auhtsContext
 
-
-
     
+
     const [usuario, setUsuario] = useState({
         nombre:'',
         email:'',
@@ -26,6 +26,17 @@ const NuevaCuenta = () => {
         confirmar:''
     })
     const { nombre, email, password, confirmar } = usuario 
+
+
+
+    useEffect(() => {
+        if(autenticado){
+            props.history.push('/proyectos')
+        }
+        if(mensaje){
+            mostrarAlertaFunc(mensaje.msg, mensaje.categoria)
+        }
+    }, [mensaje, autenticado, props.history])
 
 
     const handleChange = e => {

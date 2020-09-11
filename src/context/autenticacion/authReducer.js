@@ -19,7 +19,6 @@ export default (state, action) => {
         case REGISTRO_ERROR:
             return{
                 ...state,
-                autenticado: true,
                 mensaje: action.payload
             }
         default:
