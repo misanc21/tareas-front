@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom'
 
 import alertaContext from '../../context/alertas/alertaContext'
+import authContext from '../../context/autenticacion/authContext'
 
 const NuevaCuenta = () => { 
     const alertasContext = useContext(alertaContext)
@@ -9,6 +10,14 @@ const NuevaCuenta = () => {
         mostrarAlertaFunc,
         alerta
     } = alertasContext
+
+    const auhtsContext = useContext(authContext)
+    const {
+        registrarUsuarioFunc
+    } = auhtsContext
+
+
+
     
     const [usuario, setUsuario] = useState({
         nombre:'',
@@ -42,6 +51,12 @@ const NuevaCuenta = () => {
             mostrarAlertaFunc('los passwords no son iguales', 'alerta-error')
             return
         }
+
+        registrarUsuarioFunc({
+            nombre,
+            email,
+            password
+        })
 
     }
 
