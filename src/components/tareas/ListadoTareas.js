@@ -23,7 +23,7 @@ const ListadoTareas = () => {
     const [proyecto] = proyectoActual
 
     const handleEliminarProyecto = () => {
-        stEliminaProyecto(proyecto.id)
+        stEliminaProyecto(proyecto._id)
     }
 
     return (
