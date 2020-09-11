@@ -13,7 +13,8 @@ export default (state, action) => {
             return {
                 ...state,
                 autenticado: true,
-                usuario: action.payload
+                usuario: action.payload,
+                cargando: false
             }
         case LOGIN_EXITOSO:
         case REGISTRO_EXITOSO:
@@ -21,7 +22,8 @@ export default (state, action) => {
             return {
                 ...state,
                 autenticado: true,
-                mensaje: null
+                mensaje: null,
+                cargando: false
             }
          case CERRAR_SESION:
         case LOGIN_ERROR:
@@ -32,7 +34,8 @@ export default (state, action) => {
                 token: null,
                 usuario:null,
                 autenticado: null,
-                mensaje: action.payload
+                mensaje: action.payload,
+                cargando: false
             }
         default:
             return state
