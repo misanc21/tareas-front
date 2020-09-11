@@ -6,7 +6,8 @@ const Barra = () => {
     const authsContext = useContext(AuthContext)
     const {
         usuarioAutenticadoFunc,
-        usuario
+        usuario,
+        cerrarSesionFunc
     } = authsContext
 
     useEffect(() => {
@@ -18,7 +19,12 @@ const Barra = () => {
         <header className="app-header">
             {usuario ? <p className="nombre-usuario">Hola <span>{usuario.nombre}</span></p> : null}
             <nav className="nav-principal">
-                <a href="!#"> Cerrar sesión </a>
+                <button 
+                    className="btn btn-blank cerrar-sesion"
+                    onClick={() => cerrarSesionFunc()}
+                >
+                    Cerrar sesión
+                </button>
             </nav>
         </header>
      );

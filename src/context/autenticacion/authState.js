@@ -86,6 +86,12 @@ const AuthState = props => {
         }
     }
 
+    const cerrarSesionFunc = () => {
+        dispatch({
+            type: CERRAR_SESION
+        })
+    }
+
     return (
         <AuthContext.Provider
             value = {{
@@ -95,7 +101,8 @@ const AuthState = props => {
                 mensaje: state.mensaje,
                 registrarUsuarioFunc,
                 inicioSesionFunc,
-                usuarioAutenticadoFunc
+                usuarioAutenticadoFunc,
+                cerrarSesionFunc
             }}
         >
             {props.children}
