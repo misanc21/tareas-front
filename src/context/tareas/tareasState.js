@@ -8,7 +8,6 @@ import {
     AGREGAR_TAREA,
     VALIDAR_TAREA,
     ELIMINAR_TAREA,
-    STATUS_TAREA,
     TAREA_ACTUAL,
     ACTUALIZAR_TAREA
 } from '../../types'
@@ -58,19 +57,16 @@ const TareasState = props => {
     }
 
     //ELIMINAR TAREA
-    const deleteTareaFunc = id => {
-        dispatch({
-            type: ELIMINAR_TAREA,
-            payload: id
-        })
-    }
-
-    //CAMBIA EL ESO DE ADA TAREA
-    const cambiaStatusTareaFunc = tarea => {
-        dispatch({
-            type: STATUS_TAREA,
-            payload: tarea
-        })
+    const deleteTareaFunc = async (id,proyecto) => {
+        try {
+            await clienteAxios.delete(`/api/tareas/${id}`, {params:{ proyecto}})
+            dispatch({
+                type: ELIMINAR_TAREA,
+                payload: id
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     //EXTRAE UNA TAREA PARA EDICION
@@ -82,11 +78,17 @@ const TareasState = props => {
     }
 
     //ACTUALIZAR TAREA
-    const updateTareaActualFunc = tarea => {
-        dispatch({
-            type: ACTUALIZAR_TAREA,
-            payload: tarea
-        })
+    const updateTareaActualFunc = async tarea => {
+        try {
+            const resultado = await clienteAxios.put(`/api/tareas/${tarea._id}`, tarea)
+            console.log(resultado)
+            dispatch({
+                type: ACTUALIZAR_TAREA,
+                payload: resultado.data.tarea
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
     return ( 
         <tareasContext.Provider
@@ -95,7 +97,6 @@ const TareasState = props => {
                 addTareaFunc,
                 validaTareaFunc,
                 deleteTareaFunc,
-                cambiaStatusTareaFunc,
                 putTareaActualFunc,
                 updateTareaActualFunc,
                 tareasProyecto: state.tareasProyecto,

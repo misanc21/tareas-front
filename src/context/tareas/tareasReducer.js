@@ -35,7 +35,6 @@ export default (state, action) => {
                 ...state,
                 tareasProyecto : nuevas
             }
-        case STATUS_TAREA:
         case ACTUALIZAR_TAREA:
             const nvatareas = state.tareasProyecto.map(t => t._id === action.payload.id ? action.payload : t)
             console.log(nvatareas)

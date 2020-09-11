@@ -8,18 +8,18 @@ const Tarea = ( { tarea }) => {
     const {
         deleteTareaFunc,
         getTareasFunc,
-        cambiaStatusTareaFunc,
-        putTareaActualFunc
+        putTareaActualFunc,
+        updateTareaActualFunc
     } = tareaContext
 
     const handleDeleteTarea = () => {
-        deleteTareaFunc(tarea.id)
-        getTareasFunc(tarea.proyectoId)
+        deleteTareaFunc(tarea._id, tarea.proyecto)
+        getTareasFunc(tarea.proyecto)
     }
 
     const cambiarStatus = () => {
         tarea.estado = !tarea.estado
-        cambiaStatusTareaFunc(tarea)
+        updateTareaActualFunc(tarea)
     }
 
     const handlePutTareaActual = () => {

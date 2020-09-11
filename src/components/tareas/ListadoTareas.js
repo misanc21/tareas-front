@@ -37,7 +37,7 @@ const ListadoTareas = () => {
                         {
                             tareasProyecto.map(t => (
                                 <CSSTransition 
-                                    key={t.id}
+                                    key={t._id}
                                     timeout={500}
                                     classNames="tarea"
                                 >

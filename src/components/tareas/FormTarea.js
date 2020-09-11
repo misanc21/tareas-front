@@ -62,7 +62,7 @@ const FormTarea = () => {
         if (tareaSeleccionada === null){
             addTareaFunc(tarea)
         }else{
-            updateTareaActualFunc(tarea)
+            updateTareaActualFunc(tarea, tarea.proyecto)
         }
 
         
