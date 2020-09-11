@@ -10,12 +10,13 @@ const NuevaCuenta = props => {
         mostrarAlertaFunc,
         alerta
     } = alertasContext
-    const auhtsContext = useContext(authContext)
+
+    const authsContext = useContext(authContext)
     const {
         registrarUsuarioFunc,
         mensaje,
         autenticado
-    } = auhtsContext
+    } = authsContext
 
     
 
@@ -29,14 +30,6 @@ const NuevaCuenta = props => {
 
 
 
-    useEffect(() => {
-        if(autenticado){
-            props.history.push('/proyectos')
-        }
-        if(mensaje){
-            mostrarAlertaFunc(mensaje.msg, mensaje.categoria)
-        }
-    }, [mensaje, autenticado, props.history])
 
 
     const handleChange = e => {

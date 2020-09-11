@@ -1,8 +1,9 @@
 import React, {useReducer} from 'react';
-import clienteAxios from '../../config/axios'
 
-import authContext from './authContext'
-import authReducer from './authReducer'
+import AuthContext from './authContext'
+import AuthReducer from './authReducer'
+
+import clienteAxios from '../../config/axios'
 
 import {
     REGISTRO_EXITOSO,
@@ -14,51 +15,43 @@ import {
 } from '../../types'
 
 const AuthState = props => {
-    
     const initialState = {
         token: localStorage.getItem('token'),
         autenticado: null,
         usuario: null,
         mensaje: null
     }
-    const [state, dispatch] = useReducer(authReducer, initialState)
-    
-    const registrarUsuarioFunc = async datos => {
-        await clienteAxios.post('/api/usuarios', datos)
-        .then (res => {
+    const [state, dispatch] = useReducer(AuthReducer, initialState)
+
+    const registrarUsuarioFunc = async datos =>{
+        try {
+            const respuesta = await clienteAxios.post('/api/usuarios', datos)
+            console.log(respuesta)
             dispatch({
                 type: REGISTRO_EXITOSO,
-                payload: res.data
+                payload: respuesta.data
             })
-            console.log('si paso')
-        })
-        .catch (error => {
-            console.log('no paso')
-            const alerta = {
-                msg: error.response.data.msg,
-                categoria: 'alerta-error'
-            }
-
+        } catch (error) {
+            console.log(error.response)
             dispatch({
-                type: REGISTRO_ERROR,
-                payload: alerta
+                type: REGISTRO_ERROR
             })
-        })
+        }
     }
 
     return (
-        <authContext.Provider
-            value={{
-                registrarUsuarioFunc,
+        <AuthContext.Provider
+            value = {{
                 token: state.token,
-                autenticado: state.autenticado,
+                autenticado: state.auntenticado,
                 usuario: state.usuario,
                 mensaje: state.mensaje,
+                registrarUsuarioFunc,
             }}
         >
             {props.children}
-        </authContext.Provider>
-    )
+        </AuthContext.Provider>
+      );
 }
-
-export default AuthState
+ 
+export default AuthState;
