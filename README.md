@@ -5,6 +5,7 @@ _Proyecto de to-do list con inicio de seion de usuarios hecho con MERN stack_
 _Poyecto realizado con hooks, especialmente con useContext y useReducer para la manipulacion de los states_ 
 
 * [demo] (https://sharp-leakey-18b330.netlify.app/)
+![myimage-alt-tag](/imgdemo.png)
 
 ## Construido con 🛠️
 _El siguiente proyecto fue construido con las siguientes herramientas_
